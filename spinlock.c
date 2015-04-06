@@ -1,4 +1,4 @@
-// Mutual exclusion spin locks. Cause Ben is cool
+// Mutual exclusion spin locks. 
 
 #include "types.h"
 #include "defs.h"
