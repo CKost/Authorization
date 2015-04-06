@@ -99,6 +99,9 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
+extern int sys_chown(void);
+extern int sys_chmod(void);
+extern int sys_access(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -123,6 +126,9 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_getppid] sys_getppid,
+[SYS_chown] sys_chown,
+[SYS_chmod] sys_chmod,
+[SYS_access] sys_access,
 };
 
 void

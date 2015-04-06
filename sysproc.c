@@ -104,3 +104,25 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//GROU PROJECT TO ADD SYS CALLS
+int 
+sys_chown(void)
+{
+    int x  =0;
+    return x;
+}
+
+int 
+sys_chmod(void)
+{
+    int x  =0;
+    return x;
+}
+
+int 
+sys_access(void)
+{
+    int x  =0;
+    return x;
+}
