@@ -24,6 +24,9 @@ int getppid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int chown(void);
+int chmod(void);
+int access(void);
 
 // ulib.c
 int stat(char*, struct stat*);
