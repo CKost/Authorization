@@ -21,7 +21,7 @@ main(void)
 
   for(;;){
     printf(1, "init: starting sh\n");
-    printf(1,"Greetings Master Daniel Recker, dreck410\n");
+    printf(1,"Greetings Masters Mr. Recker, Koster, Wigglesworth, Matthews, AKA Team Get It Done.\n");
     pid = fork();
     if(pid < 0){
       printf(1, "init: fork failed\n");
