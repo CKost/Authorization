@@ -36,6 +36,9 @@ struct devsw {
 extern struct devsw devsw[];
 
 #define CONSOLE 1
+#define DEV_NULL 2
+#define DEV_ZERO 3
+#define DEV_URANDOM 4
 
 //PAGEBREAK!
 // Blank page.
