@@ -17,15 +17,15 @@ main(void)
     open("console", O_RDWR);
   }
   // Begin device additions
-  if(open("/dev/null", O_RDWR) < 0){
-    mknod("/dev/null", 2, 1);
+  if(open("null", O_RDWR) < 0){
+    mknod("null", 2, 1);
   }
-  if(open("/dev/zero", O_RDWR) < 0){
-    mknod("/dev/zero", 3, 1);
-  }
-  if(open("/dev/urandom", O_RDWR) < 0){
-    mknod("/dev/urandom", 4, 1);
-  }
+  // if(open("/dev/zero", O_RDWR) < 0){
+  //   mknod("/dev/zero", 3, 1);
+  // }
+  // if(open("/dev/urandom", O_RDWR) < 0){
+  //   mknod("/dev/urandom", 4, 1);
+  // }
 
   dup(0);  // stdout
   dup(0);  // stderr
