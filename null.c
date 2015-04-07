@@ -13,11 +13,6 @@ nullread(struct inode *ip, char *dst, int n)
 int
 nullwrite(struct inode *ip, char *buf, int n)
 {
-  int i;
-
-  for(i = 0; i < n; i++)
-    buf[i] = 0;
-
   return n;
 }
 
