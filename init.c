@@ -22,10 +22,10 @@ main(void)
   }
   if(open("zero", O_RDWR) < 0){
     mknod("zero", 3, 1);
-   }
-  // if(open("/dev/urandom", O_RDWR) < 0){
-  //   mknod("/dev/urandom", 4, 1);
-  //  }
+  }
+  if(open("urandom", O_RDWR) < 0){
+    mknod("urandom", 4, 1);
+  }
 
   dup(0);  // stdout
   dup(0);  // stderr

@@ -18,70 +18,39 @@ def rng():
 for i in range(10):
     print rng()
 */
+
+#include "types.h"
+#include "defs.h"
+#include "param.h"
+#include "traps.h"
+#include "spinlock.h"
+#include "fs.h"
+#include "file.h"
+#include "memlayout.h"
+#include "mmu.h"
+#include "proc.h"
+#include "x86.h"
+
 int
 urandomread(struct inode *ip, char *dst, int n)
 {
-  uint target;
-  int c;
-
-  iunlock(ip);
-  target = n;
-  acquire(&input.lock);
-  while(n > 0){
-    while(input.r == input.w){
-      if(proc->killed){
-        release(&input.lock);
-        ilock(ip);
-        return -1;
-      }
-      sleep(&input.r, &input.lock);
-    }
-    c = input.buf[input.r++ % INPUT_BUF];
-    if(c == C('D')){  // EOF
-      if(n < target){
-        // Save ^D for next time, to make sure
-        // caller gets a 0-byte result.
-        input.r--;
-      }
-      break;
-    }
-    *dst++ = c;
-    --n;
-    if(c == '\n')
-      break;
+  int i = 0;
+  for (; i < n; ++i)
+  {
+    dst[i] = 'i';
   }
-  release(&input.lock);
-  ilock(ip);
-
-  return target - n;
+  return i;
 }
 
 int
 urandomwrite(struct inode *ip, char *buf, int n)
 {
-  int i;
-
-  iunlock(ip);
-  acquire(&cons.lock);
-  for(i = 0; i < n; i++)
-    consputc(buf[i] & 0xff);
-  release(&cons.lock);
-  ilock(ip);
-
-  return n;
+    return 0;
 }
 
 void
 urandominit(void)
 {
-  initlock(&cons.lock, "console");
-  initlock(&input.lock, "input");
-
-  devsw[CONSOLE].write = consolewrite;
-  devsw[CONSOLE].read = consoleread;
-  cons.locking = 1;
-
-  picenable(IRQ_KBD);
-  ioapicenable(IRQ_KBD, 0);
+    devsw[DEV_URANDOM].write = urandomwrite;
+    devsw[DEV_URANDOM].read = urandomread;
 }
-
