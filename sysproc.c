@@ -43,6 +43,20 @@ sys_getpid(void)
 }
 
 int
+sys_getuid(void)
+{
+  return 123;
+}
+
+/*
+int
+sys_setuid(void)
+{
+  return;
+}
+*/
+
+int
 sys_sbrk(void)
 {
   int addr;
