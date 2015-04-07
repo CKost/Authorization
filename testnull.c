@@ -1,23 +1,24 @@
-// // Create a zombie process that 
-// // must be reparented at exit.
+// Read in input and send it to /dev/null
+// should see no output and not blow up
 
-// #include "types.h"
-// #include "stat.h"
-// #include "user.h"
+#include "types.h"
+#include "user.h"
+#include "fcntl.h"
 
-// char buf[512];
+char buf[512];
 
-// int
-// main(void)
-// {
-//   int n, fd;
+int
+main(void)
+{
+  int n, fd;
 
-//   fd = open("null", O_WRONLY)
+  fd = open("null", O_WRONLY);
 
-//   while((n = read(1, buf, sizeof(buf))) > 0)
-//     write(1, buf, n);
-//   if(n < 0){
-//     printf(1, "cat: read error\n");
-//     exit();
-//   }
-// }
+  while((n = read(0, buf, sizeof(buf))) > 0){
+    write(fd, buf, n);
+  }
+  if(n < 0){
+    printf(1, "testnull: read error\n");
+  }
+  exit();
+}
