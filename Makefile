@@ -26,6 +26,7 @@ OBJS = \
 	trapasm.o\
 	trap.o\
 	uart.o\
+	urandom.o\
 	vectors.o\
 	vm.o\
 	zero.o\
@@ -176,6 +177,7 @@ UPROGS=\
 	_zombie\
 	_testnull\
 	_testzero\
+	_testurandom\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
