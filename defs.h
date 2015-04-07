@@ -182,6 +182,9 @@ void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
 
+// urandom.c
+void 			urandominit(void);
+
 // zero.c
 void 			zeroinit(void);
 

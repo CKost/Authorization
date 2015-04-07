@@ -26,6 +26,7 @@ OBJS = \
 	trapasm.o\
 	trap.o\
 	uart.o\
+	urandom.o\
 	vectors.o\
 	vm.o\
 	zero.o\

@@ -28,7 +28,7 @@ main(void)
   consoleinit();   // I/O devices & their interrupts
   nullinit();     // /dev/null
   zeroinit();     // /dev/zero
-  //urandominit();  // /dev/urandom
+  urandominit();  // /dev/urandom
   uartinit();      // serial port
   pinit();         // process table
   tvinit();        // trap vectors
