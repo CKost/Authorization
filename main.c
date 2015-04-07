@@ -27,7 +27,7 @@ main(void)
   ioapicinit();    // another interrupt controller
   consoleinit();   // I/O devices & their interrupts
   nullinit();     // /dev/null
-  //zeroinit();     // /dev/zero
+  zeroinit();     // /dev/zero
   //urandominit();  // /dev/urandom
   uartinit();      // serial port
   pinit();         // process table
