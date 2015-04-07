@@ -20,7 +20,7 @@ main(void)
   	buf[i] = '1';
   }
 
-  fd = open("zero", O_WRONLY);
+  fd = open("zero", O_RDONLY);
 
   n = read(fd, buf, sizeof(buf));
 
@@ -30,7 +30,18 @@ main(void)
   }
 
   if(n < 0){
-    printf(1, "testzero: read error\n");
+    printf(1, "testzero: read error (maybe, we think so...)\n");
   }
+
+  // loop de buf
+  i = 0;
+  for (; i < 512; ++i) {
+  	if (buf[i] == 1) { 
+  		//fail
+  		printf(1, "testzero: we left a 1 somewhere (fail)\n");
+  		exit();
+  	}
+  }
+  printf(1, "success, maybe, we think so....\n");
   exit();
 }

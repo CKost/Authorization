@@ -21,7 +21,7 @@ zeroread(struct inode *ip, char *dst, int n)
 	{
 		dst[i] = '\0';
 	}
-  	return dst;
+  	return i;
 }
 
 int
