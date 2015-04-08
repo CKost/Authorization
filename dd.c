@@ -1,4 +1,7 @@
-// Simple grep.  Only supports ^ . * $ operators.
+// Simple dd. Supports if, of, and sz.
+// sz is bytes       (default: MAXUINT)
+// of is output file (default: STDOUT)
+// if is input file  (default: STDIN)
 
 #include "types.h"
 #include "user.h"
@@ -14,11 +17,12 @@ main(int argc, char *argv[])
   int inFile, outFile, i;
   uint sz ,tot;
 
-  inFile = 0;
-  outFile = 1;
-  sz = -1;
-  inf = "STDIN";
-  outf = "STDOUT";
+  // defaults
+  inFile = 0;     // stdin
+  outFile = 1;    // stdout
+  sz = -1;        // infinite bytes
+  inf = "STDIN";  // input descriptor
+  outf = "STDOUT";// output descriptor
   
   // Iterate over arguments
   for(i = 1; i < argc; ++i){
@@ -55,16 +59,20 @@ main(int argc, char *argv[])
     }
   }
 
-  tot = 0;
+  // Read/Write
+  tot = 0; // total bytes written
   i = sizeof(buf);
   while(i == sizeof(buf) && tot < sz){
     i = read(inFile, buf, sizeof(buf) + tot < sz ? sizeof(buf) : sz - tot);
     write(outFile, buf, i);
     tot += i;
   }
+
+  // Close out of any open files and exit
   if(inFile != 0)  close(inFile);
   if(outFile != 1) close(outFile);
-  
+
+  // ooooo! fancy message output... shiny!
   printf(1, "%d bytes written to <%s> from <%s>\n", tot, outf, inf);
   exit();
 }
