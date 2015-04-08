@@ -16,7 +16,7 @@
 int nblocks = (995-LOGSIZE);
 int nlog = LOGSIZE;
 int ninodes = 200;
-int size = 1024;
+int size = 1024 + 3;
 
 int fsfd;
 struct superblock sb;
@@ -74,7 +74,11 @@ main(int argc, char *argv[])
     exit(1);
   }
 
-  assert((512 % sizeof(struct dinode)) == 0);
+
+  assert(((512 + 64) % sizeof(struct dinode)) == 0);
+  //fprintf(1, "%lu",sizeof(struct dinode));
+  //
+
   assert((512 % sizeof(struct dirent)) == 0);
 
   fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);
