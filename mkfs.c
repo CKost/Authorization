@@ -16,7 +16,8 @@
 int nblocks = (995-LOGSIZE);
 int nlog = LOGSIZE;
 int ninodes = 200;
-int size = 1024 + 3;
+int size = 1024 + 3; // +3 accounts for the added things to the i-node structure
+//int size = 1024;
 
 int fsfd;
 struct superblock sb;
@@ -75,7 +76,7 @@ main(int argc, char *argv[])
   }
 
 
-  assert(((512 + 64) % sizeof(struct dinode)) == 0);
+  assert(((512 + 64) % sizeof(struct dinode)) == 0); // +64 because inode got bigger
   //fprintf(1, "%lu",sizeof(struct dinode));
   //
 

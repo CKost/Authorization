@@ -105,7 +105,8 @@ sys_uptime(void)
   return xticks;
 }
 
-//GROU PROJECT TO ADD SYS CALLS
+
+//GROUP PROJECT TO ADD SYS CALLS
 int 
 sys_chown(char* file_name, uint new_UIDNumb)
 {
@@ -125,7 +126,7 @@ sys_chmod(char* file_name, uint new_permBit)
 }
 
 int 
-sys_access(void)
+sys_access(void) // added by Curtis
 {
     int x  =0;
     return x;
