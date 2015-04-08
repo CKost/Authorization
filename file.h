@@ -20,10 +20,12 @@ struct inode {
   short major;
   short minor;
   short nlink;
+  short permBit;
   uint size;
   uint addrs[NDIRECT+1];
   uint UIDNUMB;
 };
+
 #define I_BUSY 0x1
 #define I_VALID 0x2
 

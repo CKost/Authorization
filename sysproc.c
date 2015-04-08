@@ -109,14 +109,18 @@ sys_uptime(void)
 int 
 sys_chown(void)
 {
+  //changes the file to be owned by someone else.
     int x  =0;
     return x;
 }
 
+
 int 
 sys_chmod(void)
 {
+  //will eventually check the user's id to make sure they are the owner of the file.
     int x  =0;
+
     return x;
 }
 
