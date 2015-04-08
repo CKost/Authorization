@@ -62,8 +62,9 @@ main(int argc, char *argv[])
     write(outFile, buf, i);
     tot += i;
   }
-  close(inFile);
-  close(outFile);
+  if(inFile != 0)  close(inFile);
+  if(outFile != 1) close(outFile);
+  
   printf(1, "%d bytes written to <%s> from <%s>\n", tot, outf, inf);
   exit();
 }
