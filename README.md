@@ -15,10 +15,12 @@ LOG:
 4/7/15 21:31 - Daniel working with Curtis.
 
 TODO:
-1) Add owning UID to inode data
-2) Permission bits in inode structures
-3) New Syscall: chown
-4) New Syscall: chmod
-5) New Syscall: access
+1) Add owning UID to inode data -- CK & DR
+2) Permission bits in inode structures -- CK & DR
+3) New Syscall: chown -- STUBBED BY CK & DR
+	a. Need to send data to sys_chown()
+4) New Syscall: chmod -- STUBBED BY CK & DR
+	a. need to send data to sys_chmod()
+5) New Syscall: access -- STUBBEED BY CK
 6) Modify open() to perform access checks
 
