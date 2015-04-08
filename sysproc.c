@@ -107,7 +107,7 @@ sys_uptime(void)
 
 //GROU PROJECT TO ADD SYS CALLS
 int 
-sys_chown(void)
+sys_chown(char* file_name, uint new_UIDNumb)
 {
   //changes the file to be owned by someone else.
     int x  =0;
@@ -116,12 +116,12 @@ sys_chown(void)
 
 
 int 
-sys_chmod(void)
+sys_chmod(char* file_name, uint new_permBit)
 {
   //will eventually check the user's id to make sure they are the owner of the file.
-    int x  =0;
+    //printf(1, "%s\n%d\n",file_name,new_UIDNumb );
 
-    return x;
+    return new_permBit;
 }
 
 int 
