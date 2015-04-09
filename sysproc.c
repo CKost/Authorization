@@ -119,8 +119,8 @@ sys_chown(void)
   if(argptr(0, &file_name, x) < 0)
     return -1;
   //kprintf(file_name[0]);//(1,"%s\n", file_name);
-  return file_name[0];
-  return ip;
+
+  return 0;
 }
 
 
