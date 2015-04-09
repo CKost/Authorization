@@ -152,3 +152,12 @@ sys_access(void) // added by Curtis
     int x  =0;
     return x;
 }
+
+// Quit system call
+int
+sys_quit(void)
+{
+  cprintf("XV6 Shutting Down. Goodbye!\n");
+  outw( 0xB004, 0x0 | 0x2000 );
+  return 0;
+}

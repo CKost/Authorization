@@ -176,6 +176,7 @@ UPROGS=\
 	_chown\
 	_chmod\
     _access\
+    _quit\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

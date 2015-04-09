@@ -27,6 +27,7 @@ int uptime(void);
 int chown(char*, uint );
 int chmod(char*, uint );
 int access(uint , char*, short);
+int quit(void);
 
 // ulib.c
 int stat(char*, struct stat*);
@@ -42,4 +43,4 @@ void* malloc(uint);
 void free(void*);
 int atoi(const char*);
 void* testppid(void);
-void* exit(void);
+
