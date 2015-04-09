@@ -4,9 +4,9 @@
 
 int STDOUT = 1;
 
-int uaccess(c){
-
-	printf(STDOUT,"access sys call");
+int uaccess(uint varX , char* filename , short varZ){
+   
+	printf(STDOUT,"access sys call\n");
 	
 
 	
@@ -17,7 +17,16 @@ int uaccess(c){
 int
 main(int argc, char **argv)
 {
-	
-	uaccess();
+	//Takes:
+        //User X (UID)
+        // File Y
+       //  Purpose Z
+        if(argc != 4){ //4 Because call style is: access x y z 
+		printf(1,"Requires 3 Args: User X, File Y, Purpoze Z\n");
+        
+        exit();
+        }
+    
+	uaccess(atoi(argv[1]),argv[2],atoi(argv[3]));
   exit();
 }
