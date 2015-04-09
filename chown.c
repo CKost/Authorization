@@ -6,11 +6,24 @@ int STDOUT = 1;
 
 int uchown(char* file_name, uint new_UIDNumb){
 
-	printf(STDOUT,"%s%s%s%d\n", "You changed ", file_name, " to ", new_UIDNumb);
-	//TODO verify file
-	//TODO pass args to chown
 	int x = chown(file_name, new_UIDNumb);
-	printf(1, "%d\n", x);
+	if(-1 == x){
+		printf(1, "Error: File Name Invalid\n");
+		return 0;
+	}
+	if(-2 == x){
+		printf(1, "Error: Not a valid UID\n");
+		return 0;
+	}
+	if(-2 == x){
+		printf(1, "Error: Could not obtain i-node\n");
+		return 0;
+	}
+	if(new_UIDNumb == (int)'?'){
+		printf(1, "%s UID is %d\n",file_name, x);
+	}else{
+		printf(STDOUT,"%s%s%s%d\n", "You changed ", file_name, " to ", x);
+	}
 	return 0;
 }
 
