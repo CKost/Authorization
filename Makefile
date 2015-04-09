@@ -179,6 +179,7 @@ UPROGS=\
 	_testnull\
 	_testzero\
 	_testurandom\
+	_mknod\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
