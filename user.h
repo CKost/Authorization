@@ -27,6 +27,7 @@ int uptime(void);
 int chown(char*, uint);
 int chmod(char*, uint);
 int access(uint , char*, short);
+int quit(void);
 
 // ulib.c
 int stat(char*, struct stat*);
