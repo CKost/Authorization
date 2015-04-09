@@ -175,6 +175,7 @@ UPROGS=\
 	_testppid\
 	_chown\
 	_chmod\
+    _access\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

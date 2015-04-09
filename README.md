@@ -13,6 +13,7 @@ LOG:
 4/6/15 19:41 - CK: Method Stubs & fs.h added permission bit/UID to Inode Struct
 4/6/15 19:41 - BRM: Git Setup
 4/7/15 21:31 - Daniel working with Curtis.
+4/8/15 20:39 - CK: Working on Access user program yay
 
 TODO:
 1) Add owning UID to inode data -- CK & DR
