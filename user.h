@@ -24,8 +24,8 @@ int getppid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
-int chown(char*, uint );
-int chmod(char*, uint );
+int chown(char*, uint);
+int chmod(char*, uint);
 int access(uint , char*, short);
 int quit(void);
 
@@ -43,4 +43,3 @@ void* malloc(uint);
 void free(void*);
 int atoi(const char*);
 void* testppid(void);
-

@@ -31,8 +31,8 @@ struct dinode {
   short nlink;          // Number of links to inode in file system
   short permBit;        //For Task 6: Permission Bit
   uint size;            // Size of file (bytes)
-  uint addrs[NDIRECT+1];   // Data block addresses
-  uint UIDNumb; //For Task 6: Add UID to I-Node data in on-disk
+  uint addrs[NDIRECT+1];// Data block addresses
+  uint UID;             //For Task 6: Add UID to I-Node data in on-disk
 
 };
 
