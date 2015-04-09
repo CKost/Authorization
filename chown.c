@@ -9,7 +9,8 @@ int uchown(char* file_name, uint new_UIDNumb){
 	printf(STDOUT,"%s%s%s%d\n", "You changed ", file_name, " to ", new_UIDNumb);
 	//TODO verify file
 	//TODO pass args to chown
-	chown(file_name,new_UIDNumb);
+	int x = chown(file_name, new_UIDNumb);
+	printf(1, "%d\n", x);
 	return 0;
 }
 

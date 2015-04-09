@@ -11,7 +11,7 @@ int uchmod(char* file_name, short new_permBit){
 
 	//TODO verify file
 	//todo pass args to chmod
-	int x = chmod(file_name,new_permBit);
+	int x = chmod(file_name, new_permBit);
 	printf(1,"%d\n",x );
 	return 0;
 }
