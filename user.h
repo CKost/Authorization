@@ -24,8 +24,8 @@ int getppid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
-int chown(char*, uint );
-int chmod(char*, uint );
+int chown(char*, uint);
+int chmod(char*, uint);
 int access(uint , char*, short);
 
 // ulib.c

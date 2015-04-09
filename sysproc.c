@@ -106,46 +106,6 @@ sys_uptime(void)
 }
 
 
-//GROUP PROJECT TO ADD SYS CALLS
-int
-sys_chown(void)
-{
-  //changes the file to be owned by someone else.
-  char* file_name = 0;
-  int UID = 0;
-  // get the file name from userland
-  int x = fetchstr(0,&file_name);
-  if(argptr(0, &file_name, x) < 0)
-    return -1;
-  // get the UID from userland
-  if(argint(1, &UID) < 0)
-    return -1;
-
-
-
-  return 0;
-}
-
-
-int 
-sys_chmod(void)
-{
-  //will eventually check the user's id to make sure they are the owner of the file.
-  //changes the file to be owned by someone else.
-  char* file_name = 0;
-  int permBit = 0;
-  // get the file name from userland
-  int x = fetchstr(0,&file_name);
-  if(argptr(0, &file_name, x) < 0)
-    return -1;
-  // get the permBit from userland
-  if(argint(1, &permBit) < 0)
-    return -1;
-
-
-    return 0;
-}
-
 int 
 sys_access(void) // added by Curtis
 {

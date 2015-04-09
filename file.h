@@ -23,7 +23,7 @@ struct inode {
   short permBit;
   uint size;
   uint addrs[NDIRECT+1];
-  uint UIDNUMB;
+  uint UID;
 };
 
 #define I_BUSY 0x1
