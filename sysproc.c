@@ -45,16 +45,14 @@ sys_getpid(void)
 int
 sys_getuid(void)
 {
-  return 123;
+  return proc->uid;
 }
 
-/*
 int
 sys_setuid(void)
 {
-  return;
+  return 0;
 }
-*/
 
 int
 sys_sbrk(void)
