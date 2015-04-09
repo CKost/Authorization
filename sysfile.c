@@ -450,6 +450,7 @@ sys_chown(void)
   //changes the file to be owned by someone else.
   char* file_name = 0;
   int UID = 0;
+  struct inode *ip;
   // get the file name from userland
   int x = fetchstr(0,&file_name);
   if(argptr(0, &file_name, x) < 0)

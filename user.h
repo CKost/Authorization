@@ -42,4 +42,3 @@ void* malloc(uint);
 void free(void*);
 int atoi(const char*);
 void* testppid(void);
-void* exit(void);
