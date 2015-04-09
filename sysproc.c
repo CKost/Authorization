@@ -112,13 +112,16 @@ sys_chown(void)
 {
   //changes the file to be owned by someone else.
   char* file_name = 0;
-  int ip = 0;
-  if(argint(1, &ip) < 0)
-    return -1;
+  int UID = 0;
+  // get the file name from userland
   int x = fetchstr(0,&file_name);
   if(argptr(0, &file_name, x) < 0)
     return -1;
-  //kprintf(file_name[0]);//(1,"%s\n", file_name);
+  // get the UID from userland
+  if(argint(1, &UID) < 0)
+    return -1;
+
+
 
   return 0;
 }
@@ -128,7 +131,17 @@ int
 sys_chmod(void)
 {
   //will eventually check the user's id to make sure they are the owner of the file.
-    //printf(1, "%s\n%d\n",file_name,new_UIDNumb );
+  //changes the file to be owned by someone else.
+  char* file_name = 0;
+  int permBit = 0;
+  // get the file name from userland
+  int x = fetchstr(0,&file_name);
+  if(argptr(0, &file_name, x) < 0)
+    return -1;
+  // get the permBit from userland
+  if(argint(1, &permBit) < 0)
+    return -1;
+
 
     return -1;
 }
