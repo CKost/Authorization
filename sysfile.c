@@ -15,6 +15,8 @@
 #include "fcntl.h"
 #include "syscall.h"
 
+
+
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
 static int
@@ -263,7 +265,7 @@ create(char *path, short type, short major, short minor)
   ip->major = major;
   ip->minor = minor;
   ip->nlink = 1;
-  ip->UID   = 9001; // IT's OVER 9000!!!
+  ip->UID   = proc->uid; // defaults to current user
   iupdate(ip);
 
   if(type == T_DIR){  // Create . and .. entries.
@@ -501,7 +503,7 @@ sys_chown(void)
   begin_op();
   if((ip = namei(path)) == 0){
     end_op();
-    return -3;
+    return -2;
   }
 
   ilock(ip);
@@ -517,7 +519,7 @@ sys_chown(void)
   iupdate(ip);
   iunlock(ip);
   end_op();
-  return ip->UID;
+  return 0;
 
 
 }
@@ -550,8 +552,10 @@ sys_chmod(void)
     return -3;
   }
   if(permBit == -1){
+    int y = ip->permBit;
+    iunlock(ip);
     end_op();
-    return ip->permBit;    
+    return y;   
   }
   ilock(ip);
 
@@ -559,7 +563,7 @@ sys_chmod(void)
   iupdate(ip);
   iunlock(ip);
   end_op();
-  return ip->permBit;
+  return 0;
 
 }
 
@@ -590,7 +594,7 @@ sys_access(void) // added by Curtis
     return 1;
   }
   
-  if(ip-> UID == UID)
+  if(ip->UID == UID)
   {
   	end_op();
   	return 0;
