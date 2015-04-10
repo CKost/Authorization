@@ -366,7 +366,7 @@ sys_mknod(void)
   end_op();
   return 0;
 }
-
+(
 int
 sys_chdir(void)
 {
@@ -446,30 +446,41 @@ int
 sys_chown(void)
 {
   //changes the file to be owned by someone else.
-  char* file_name = "0";
+  //char* file_name = "0";
+  char* path;
   int UID = 0;
-  struct inode *ip;
+  struct inode *ip, *dp;
+  char name[DIRSIZ];
   // get the file name from userland
   
-  //int x = fetchstr(0, &file_name);
-  if(argstr(0, &file_name) < 0)
+  if(argstr(0, &path) < 0 || (dp = nameiparent(path, name)) == 0)
+    return -3;
+  ilock(dp);
+  return -3;
+
+
+  //int x = fetchstr(0, &path);
+  if(argstr(0, &path) < 0)
     return -1;
   // get the UID from userland
   if(argint(1, &UID) < 0)
     return -2;
-  // change the file's, that is named file_name, UID to UID
+  // change the file's, that is named path, UID to UID
   begin_op();
-  if((ip = namei(file_name)) == 0){
+  if((ip = namei(path)) == 0){
     end_op();
     return -3;
   }
   // file name has been verified.
   if(UID == -1){
+    end_op();
    return ip->UID;
   }
   ilock(ip);
   ip->UID = UID;
   iupdate(ip);
+  iupdate(dp);
+  iunlockput(dp);
   iunlock(ip);
   end_op();
   return ip->UID;
