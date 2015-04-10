@@ -21,6 +21,10 @@ int uchown(char* file_name, uint new_UIDNumb){
 		printf(1, "Error: Could not obtain i-node\n");
 		return 0;
 	}
+	if(-4 ==x ){
+		printf(1,"We are here\n");
+		return 0;
+	}
 
 	if(new_UIDNumb == -1){
 		printf(1, "%s UID is %d\n",file_name, x);
