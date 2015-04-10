@@ -458,17 +458,15 @@ sys_chown(void)
   if(argint(1, &UID) < 0)
     return -2;
   // change the file's, that is named file_name, UID to UID
-
-
-    begin_op();
-    if((ip = namei(file_name)) == 0){
-      end_op();
-      return -3;
-    }
+  begin_op();
+  if((ip = namei(file_name)) == 0){
+    end_op();
+    return -3;
+  }
   // file name has been verified.
-    if(UID == -1){
-      return ip->UID;
-    }
+  if(UID == -1){
+   return ip->UID;
+  }
   ilock(ip);
   ip->UID = UID;
   iupdate(ip);
@@ -485,16 +483,30 @@ sys_chmod(void)
   //changes the file to be owned by someone else.
   char* file_name = 0;
   int permBit = 0;
+  struct inode *ip;
   // get the file name from userland
-  int x = fetchstr(0,&file_name);
-  if(argptr(0, &file_name, x) < 0)
+  if(argstr(0, &file_name) < 0)
     return -1;
   // get the permBit from userland
   if(argint(1, &permBit) < 0)
-    return -1;
+    return -2;
+  // change the file's, that is named file_name, permBit to permBit
+  begin_op();
+  if((ip = namei(file_name)) == 0){
+    end_op();
+    return -3;
+  }
+  // file name has been verified.
+  if(permBit == -1){
+   return ip->permBit;
+  }
+  ilock(ip);
+  ip->permBit = permBit;
+  iupdate(ip);
+  iunlock(ip);
+  end_op();
+  return ip->permBit;
 
-
-    return 0;
 }
 
 
@@ -508,7 +520,8 @@ sys_access(void) // added by Curtis
 {
    int UID = 0;  //Arg1
    char* file_name = 0; //Arg2
-   short bits =0; //Arg3
+   int bits =0; //Arg3
+   struct inode *ip;
 
 if(argint(0, &UID) < 0)
     return -1;
@@ -529,7 +542,7 @@ begin_op();
     }
 
 
-    end__op();
+    end_op();
 
 
 
