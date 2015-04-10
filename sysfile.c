@@ -473,7 +473,7 @@ sys_chown(void)
   char* path;
   int UID;
   struct inode *ip;
-
+  // get arguments from userland
   if(argstr(0, &path) < 0 || argint(1, &UID) < 0){
     return -1;
   }
@@ -495,7 +495,6 @@ sys_chown(void)
   ip->UID = UID;
   iupdate(ip);
   iunlock(ip);
-  iput(ip);
   end_op();
   return ip->UID;
 
