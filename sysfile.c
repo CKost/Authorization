@@ -322,7 +322,7 @@ sys_open(void)
   }
   iunlock(ip);
   end_op();
-  //ADDING SYS ACCESS CALL HERE
+  //ADDING SYS ACCESS CALL HERE. Copied/Pasted ACCESS Sys Call Contents Here
 
  begin_op();
     if((ip2 = namei(path)) == 0){
@@ -343,8 +343,6 @@ sys_open(void)
 
     return -1;
   	 
- 
-  
   //END ADDING NEW CODE TO THIS CALL
   /*
   f->type = FD_INODE;
