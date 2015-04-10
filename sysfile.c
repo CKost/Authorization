@@ -506,32 +506,33 @@ sys_chmod(void)
 int 
 sys_access(void) // added by Curtis
 {
-   int UID = 0;  //Arg1
-   char* file_name = 0; //Arg2
-   short bits =0; //Arg3
+
+ int UID = 0;  //Arg1
+ char* file_name = 0; //Arg2
+  struct inode *ip;
 
 if(argint(0, &UID) < 0)
-    return -1;
+    return 1;
   
 if(argstr(1, &file_name) < 0)
-    return -2;
+    return 1;
 
-if(argint(2,&bits)<0)
-	return -3;
+
 
 begin_op();
     if((ip = namei(file_name)) == 0){
       end_op();
-      return -4;
+      return -3;
     }
     if(ip-> UID == UID){
-    	//THEY MATCH
+    	end_op();
+    	return 0;
     }
 
+     end_op();
+    return 1;
 
-    end__op();
+   
 
 
-
-    return 0;
 }//End Access
