@@ -441,31 +441,40 @@ sys_pipe(void)
   return 0;
 }
 
-
-
 //GROUP PROJECT TO ADD SYS CALLS
 int
 sys_chown(void)
 {
   //changes the file to be owned by someone else.
-  char* file_name = 0;
+  char* file_name = "0";
   int UID = 0;
   struct inode *ip;
   // get the file name from userland
-  int x = fetchstr(0,&file_name);
-  if(argptr(0, &file_name, x) < 0)
+  
+  //int x = fetchstr(0, &file_name);
+  if(argstr(0, &file_name) < 0)
     return -1;
   // get the UID from userland
   if(argint(1, &UID) < 0)
-    return -1;
+    return -2;
   // change the file's, that is named file_name, UID to UID
 
-  if((ip = namei(file_name)) == 0){
-      return -1;
+
+  begin_op();
+    if((ip = namei(file_name)) == 0){
+      end_op();
+      return -3;
     }
-
-
-  return 0;
+  // file name has been verified.
+    if(UID == '?'){
+      return ip->UID;
+    }
+  ilock(ip);
+  ip->UID = UID;
+  iupdate(ip);
+  iunlock(ip);
+  end_op();
+  return ip->UID;
 }
 
 

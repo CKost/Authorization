@@ -9,14 +9,14 @@ Benjamin 'String Bean' Matthews
 
 
 LOG:
-
 4/6/15 19:41 - CK: Method Stubs & fs.h added permission bit/UID to Inode Struct
 4/6/15 19:41 - BRM: Git Setup
 4/7/15 21:31 - Daniel working with Curtis.
 4/8/15 20:39 - CK: Working on Access user program yay
 4/9/15 18:45 - BRM: working on quit call
 4/9/15 19:21 - BRM: added quit call
-4/9/15 20:19 - BRM & CK: Working on access()
+4/9/15 20:04 - ALL: Team Working at Wiggle's
+
 
 TODO:
 1) Add owning UID to inode data -- CK & DR
@@ -25,6 +25,7 @@ TODO:
 	a. Need to send data to sys_chown()
 4) New Syscall: chmod -- STUBBED BY CK & DR
 	a. need to send data to sys_chmod()
+	
 5) New Syscall: access -- STUBBEED BY CK
 6) Modify open() to perform access checks
 
