@@ -458,17 +458,15 @@ sys_chown(void)
   if(argint(1, &UID) < 0)
     return -2;
   // change the file's, that is named file_name, UID to UID
-
-
-    begin_op();
-    if((ip = namei(file_name)) == 0){
-      end_op();
-      return -3;
-    }
+  begin_op();
+  if((ip = namei(file_name)) == 0){
+    end_op();
+    return -3;
+  }
   // file name has been verified.
-    if(UID == -1){
-      return ip->UID;
-    }
+  if(UID == -1){
+   return ip->UID;
+  }
   ilock(ip);
   ip->UID = UID;
   iupdate(ip);
@@ -486,15 +484,27 @@ sys_chmod(void)
   char* file_name = 0;
   int permBit = 0;
   // get the file name from userland
-  int x = fetchstr(0,&file_name);
-  if(argptr(0, &file_name, x) < 0)
+  if(argstr(0, &file_name) < 0)
     return -1;
   // get the permBit from userland
   if(argint(1, &permBit) < 0)
-    return -1;
-
-
-    return 0;
+    return -2;
+  // change the file's, that is named file_name, permBit to permBit
+  begin_op();
+  if((ip = namei(file_name)) == 0){
+    end_op();
+    return -3;
+  }
+  // file name has been verified.
+  if(permBit == -1){
+   return ip->permBit;
+  }
+  ilock(ip);
+  ip->permBit = permBit;
+  iupdate(ip);
+  iunlock(ip);
+  end_op();
+  return ip->permBit;
 }
 
 
