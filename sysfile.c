@@ -476,14 +476,14 @@ sys_pipe(void)
   return 0;
 }
 
-//----- BEGIN AUTHZ SYSTEM CALLS -----\\
-/*----------------------------------------
-Method Name: sys_chown
-Method Description: Checks permission bits
-to provide information about user
-Method Return: 0 if successful, 
-varying values if failed
-----------------------------------------*/
+//----- BEGIN AUTHZ SYSTEM CALLS -----
+//----------------------------------------
+//Method Name: sys_chown
+//Method Description: Checks permission bits
+//to provide information about user
+//Method Return: 0 if successful, 
+//varying values if failed
+//----------------------------------------
 int
 sys_chown(void)
 {
@@ -558,12 +558,12 @@ sys_chown(void)
 //  return ip->UID;
 }
 
-/*----------------------------------------
-Method Name: sys_chmod
-Method Description: Changes permission bits
-Method Return: 0 if successful, 
-varying values if failed
-----------------------------------------*/
+//----------------------------------------
+//Method Name: sys_chmod
+//Method Description: Changes permission bits
+//Method Return: 0 if successful, 
+//varying values if failed
+//----------------------------------------
 int 
 sys_chmod(void)
 {
@@ -599,12 +599,12 @@ sys_chmod(void)
 
 }
 
-/*----------------------------------------
-Method Name: sys_access
-Method Description: Checks to see if 
-user X can access file Y
-Method Return: 0 if successful, 1 if failure
-----------------------------------------*/
+//----------------------------------------
+//Method Name: sys_access
+//Method Description: Checks to see if 
+//user X can access file Y
+//Method Return: 0 if successful, 1 if failure
+//----------------------------------------
 int 
 sys_access(void) // added by Curtis
 {
