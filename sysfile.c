@@ -441,8 +441,6 @@ sys_pipe(void)
   return 0;
 }
 
-
-
 //GROUP PROJECT TO ADD SYS CALLS
 int
 sys_chown(void)
@@ -452,6 +450,8 @@ sys_chown(void)
   int UID = 0;
   struct inode *ip;
   // get the file name from userland
+  
+  begin_op();
   int x = fetchstr(0,&file_name);
   if(argptr(0, &file_name, x) < 0)
     return -1;
@@ -461,7 +461,6 @@ sys_chown(void)
   // change the file's, that is named file_name, UID to UID
 
 
-  begin_op();
     if((ip = namei(file_name)) == 0){
       end_op();
       return -3;

@@ -16,6 +16,9 @@ LOG:
 4/8/15 20:39 - CK: Working on Access user program yay
 4/9/15 18:45 - BRM: working on quit call
 4/9/15 19:21 - BRM: added quit call
+4/9/15 20:04 - ALL: Team Working at Wiggle's
+
+
 
 TODO:
 1) Add owning UID to inode data -- CK & DR
@@ -24,6 +27,7 @@ TODO:
 	a. Need to send data to sys_chown()
 4) New Syscall: chmod -- STUBBED BY CK & DR
 	a. need to send data to sys_chmod()
+	
 5) New Syscall: access -- STUBBEED BY CK
 6) Modify open() to perform access checks
 
