@@ -53,8 +53,11 @@ sys_setuid(void)
 {
   uint uargv;
   argint(0, (int*)&uargv);
-  proc->uid = uargv;
-  return 0;
+  if (proc->uid == 0) {
+    proc->uid = uargv;
+    return 0;
+  }
+  return -1;
 }
 
 int
