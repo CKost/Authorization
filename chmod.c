@@ -6,13 +6,27 @@ int STDOUT = 1;
 
 int uchmod(char* file_name, short new_permBit){
 
-	printf(STDOUT,"%s%s%s%d\n", "You changed ", file_name, " to ", new_permBit);
-	//calls sys_chmod here.  needs to give it a file (Check the file is in the path) and the short.
+	int x = chown(file_name, new_permBit);
+	if(-1 == x){
+		printf(1, "Error: File Name Invalid\n");
+		return 0;
+	}
+	if(-2 == x){
+		printf(1, "Error: Not a valid UID\n");
+		return 0;
+	}
 
-	//TODO verify file
-	//todo pass args to chmod
-	int x = chmod(file_name, new_permBit);
-	printf(1,"%d\n",x );
+	if(-3 == x){
+
+		printf(1, "Error: Could not obtain i-node\n");
+		return 0;
+	}
+
+	if(new_permBit == -1){
+		printf(1, "%s Permissions are %d\n",file_name, x);
+	}else{
+		printf(STDOUT,"%s%s%s%d\n", "You changed ", file_name, " to ", x);
+	}
 	return 0;
 }
 
