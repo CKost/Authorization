@@ -4,14 +4,24 @@
 
 int STDOUT = 1;
 
-int uaccess(uint varX , char* filename , short varZ){
+int uaccess(uint varX , char* filename ){
    
-    int x = access( varX, filename, varZ);
+    int x = access( varX, filename);
 	printf(STDOUT,"access sys call\n");
-	
+	if(x ==0){
+		//CAN Access
+		printf(1,"File Can Be Accessed\n");
+		return x;
+	}
+	if(x==1){
+		//CANNOT ACCESS
+		printf(1,"File Cannot Be Accessed\n");
+		return x;
+	}
 
+	printf(1,"There was an error trying to get the neccessary file data\n");
 	
-	return x;
+	return 1;
 }
 
 
@@ -22,12 +32,12 @@ main(int argc, char **argv)
         //User X (UID)
         // File Y
        //  Purpose Z
-        if(argc != 4){ //4 Because call style is: access x y z 
-		printf(1,"Requires 3 Args: User X, File Y, Purpoze Z\n");
+        if(argc != 3){ //4 Because call style is: access x y  
+		printf(1,"Requires 2 Args: User X, File Y\n");
         
         exit();
         }
     
-	uaccess(atoi(argv[1]),argv[2],atoi(argv[3]));
+   uaccess(atoi(argv[1]),argv[2]);
   exit();
 }
