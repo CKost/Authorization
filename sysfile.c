@@ -411,6 +411,8 @@ sys_chdir(void)
   }
   iunlock(ip);
   iput(proc->cwd);
+  path = processpath(proc->wdpath,path);
+  strncpy(proc->wdpath,path,256);
   end_op();
   proc->cwd = ip;
   return 0;
