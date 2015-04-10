@@ -326,20 +326,21 @@ sys_open(void)
   //ADDING SYS ACCESS CALL HERE. Copied/Pasted ACCESS Sys Call Contents Here
 
  begin_op();
-    if((ip2 = namei(path)) == 0){
+    if((ip2 = namei(path)) == 0)
+    {
       end_op();
       return -1;
     }
-    if(ip-> UID == ip2 -> UID){
-
-    	  end_op();
-    	  f->type = FD_INODE;
+    if(ip-> UID == ip2 -> UID)
+    {
+      end_op();
+    	f->type = FD_INODE;
 		  f->ip = ip;
 		  f->off = 0;
 		  f->readable = !(omode & O_WRONLY);
 		  f->writable = (omode & O_WRONLY) || (omode & O_RDWR);
 	   
-    	  return fd;
+    	return fd;
     }
 
     return -1;
@@ -362,10 +363,12 @@ sys_mkdir(void)
   struct inode *ip;
 
   begin_op();
-  if(argstr(0, &path) < 0 || (ip = create(path, T_DIR, 0, 0)) == 0){
+  if(argstr(0, &path) < 0 || (ip = create(path, T_DIR, 0, 0)) == 0)
+  {
     end_op();
     return -1;
   }
+
   iunlockput(ip);
   end_op();
   return 0;
@@ -383,10 +386,12 @@ sys_mknod(void)
   if((len=argstr(0, &path)) < 0 ||
      argint(1, &major) < 0 ||
      argint(2, &minor) < 0 ||
-     (ip = create(path, T_DEV, major, minor)) == 0){
-        end_op();
-        return -1;
+     (ip = create(path, T_DEV, major, minor)) == 0)
+  {
+    end_op();
+    return -1;
   }
+
   iunlockput(ip);
   end_op();
   return 0;
@@ -399,16 +404,21 @@ sys_chdir(void)
   struct inode *ip;
 
   begin_op();
-  if(argstr(0, &path) < 0 || (ip = namei(path)) == 0){
+  if(argstr(0, &path) < 0 || (ip = namei(path)) == 0)
+  {
     end_op();
     return -1;
   }
+
   ilock(ip);
-  if(ip->type != T_DIR){
+
+  if(ip->type != T_DIR)
+  {
     iunlockput(ip);
     end_op();
     return -1;
   }
+
   iunlock(ip);
   iput(proc->cwd);
   path = processpath(proc->wdpath,path);
@@ -468,7 +478,14 @@ sys_pipe(void)
   return 0;
 }
 
-//GROUP PROJECT TO ADD SYS CALLS
+//----- BEGIN AUTHZ SYSTEM CALLS -----
+//----------------------------------------
+//Method Name: sys_chown
+//Method Description: Checks permission bits
+//to provide information about user
+//Method Return: 0 if successful, 
+//varying values if failed
+//----------------------------------------
 int
 sys_chown(void)
 {
@@ -549,6 +566,12 @@ sys_chown(void)
 //  return ip->UID;
 }
 
+//----------------------------------------
+//Method Name: sys_chmod
+//Method Description: Changes permission bits
+//Method Return: 0 if successful, 
+//varying values if failed
+//----------------------------------------
 int 
 sys_chmod(void)
 {
@@ -584,34 +607,39 @@ sys_chmod(void)
 
 }
 
-/*----------------------------------------
-Method Name: sys_access
-Method Description: Checks to see if 
-user X can access file Y
-----------------------------------------*/
+//----------------------------------------
+//Method Name: sys_access
+//Method Description: Checks to see if 
+//user X can access file Y
+//Method Return: 0 if successful, 1 if failure
+//----------------------------------------
 int 
 sys_access(void) // added by Curtis
 {
- int UID = 0;  //Arg1
- char* file_name = 0; //Arg2
+  int UID = 0;  //Arg1
+  char* file_name = 0; //Arg2
   struct inode *ip;
 
-if(argint(0, &UID) < 0)
+  if(argint(0, &UID) < 0)
     return 1;
   
-if(argstr(1, &file_name) < 0)
+  if(argstr(1, &file_name) < 0)
     return 1;
 
-begin_op();
-    if((ip = namei(file_name)) == 0){
-      end_op();
-      return 1;
-    }
-    if(ip-> UID == UID){
-    	end_op();
-    	return 0;
-    }
-
-     end_op();
+  begin_op();
+  
+  if((ip = namei(file_name)) == 0)
+  {
+    end_op();
     return 1;
+  }
+  
+  if(ip-> UID == UID)
+  {
+  	end_op();
+  	return 0;
+  }
+
+  end_op();
+  return 1;
 }//End Access
