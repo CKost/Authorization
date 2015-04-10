@@ -460,13 +460,13 @@ sys_chown(void)
   // change the file's, that is named file_name, UID to UID
 
 
-  begin_op();
+    begin_op();
     if((ip = namei(file_name)) == 0){
       end_op();
       return -3;
     }
   // file name has been verified.
-    if(UID == '?'){
+    if(UID == -1){
       return ip->UID;
     }
   ilock(ip);
