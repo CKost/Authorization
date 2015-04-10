@@ -13,6 +13,7 @@
 #include "fs.h"
 #include "file.h"
 #include "fcntl.h"
+#include "syscall.h"
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -504,11 +505,6 @@ sys_chown(void)
   }
 
   ilock(ip);
-  if(ip->UID != getuid()){
-    //i am not who i say i am
-    end_op();
-    return -5
-  }
 
   if(UID == -1){
     int y = ip->UID;
@@ -524,46 +520,6 @@ sys_chown(void)
   return ip->UID;
 
 
-//  //changes the file to be owned by someone else.
-//  char* file_name = "0";
-//  char* path = "0";
-//  int UID = 0;
-//  struct inode *ip, *dp;
-//  char name[DIRSIZ];
-//
-//  begin_op();
-//  // get the file name from userland
-//  if(argstr(0, &path) < 0)
-//    return -1;
-//  // get the UID from userland
-//  if(argint(1, &UID) < 0)
-//    return -2;
-//  //get directory
-//  if((dp = nameiparent(path, name)) == 0)
-//    return -3;
-//  ilock(dp);
-//
-//  //get file info aka inode pointer
-//  if((ip = namei(file_name)) == 0){
-//    end_op();
-//    return -3;
-//  }
-//  // change the file's, that is named path, UID to UID
-//
-////  if((ip = namei(path)) == 0){
-////    end_op();
-////    return -3;
-////  }
-//  // file name has been verified.
-//
-//  ilock(ip);
-//  ip->UID = UID;
-//  iupdate(ip);
-//  iupdate(dp);
-//  iunlockput(dp);
-//  iunlock(ip);
-//  end_op();
-//  return ip->UID;
 }
 
 //----------------------------------------
