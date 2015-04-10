@@ -67,6 +67,8 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
   char wdpath[255];            // pointer to null-terminated working directory path
+  uint uid;                    // Real UserID
+  //uint euid;                 // Effective UserID
 };
 
 // Process memory is laid out contiguously, low addresses first:

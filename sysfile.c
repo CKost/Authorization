@@ -487,6 +487,12 @@ sys_chown(void)
   }
 
   ilock(ip);
+  if(ip->UID != getuid()){
+    //i am not who i say i am
+    end_op();
+    return -5
+  }
+
   if(UID == -1){
     int y = ip->UID;
     iunlock(ip);

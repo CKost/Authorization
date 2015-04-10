@@ -23,6 +23,7 @@ main(void)
   for(;;){
     printf(1, "init: starting sh\n");
     printf(1,"Greetings Masters.\n");// Mr. Recker AKA Team Get It Done.\n");
+    printf(1, "UID: %d\n", getuid());
     pid = fork();
     if(pid < 0){
       printf(1, "init: fork failed\n");

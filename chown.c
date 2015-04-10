@@ -25,7 +25,9 @@ int uchown(char* file_name, uint new_UIDNumb){
 		printf(1,"We are here\n");
 		return 0;
 	}
-
+	if(-5 == x){
+		printf(1,"You are not the owner of the file\n");
+	}
 	if(new_UIDNumb == -1){
 		printf(1, "%s UID is %d\n",file_name, x);
 	}else{
