@@ -105,14 +105,6 @@ sys_uptime(void)
   return xticks;
 }
 
-
-int 
-sys_access(void) // added by Curtis
-{
-    int x  =0;
-    return x;
-}
-
 // Quit system call
 int
 sys_quit(void)

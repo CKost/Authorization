@@ -487,3 +487,10 @@ sys_chmod(void)
 
     return 0;
 }
+
+int 
+sys_access(void) // added by Curtis
+{
+    int x  =0;
+    return x;
+}
