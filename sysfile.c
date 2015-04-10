@@ -475,7 +475,6 @@ sys_chown(void)
   return ip->UID;
 }
 
-
 int 
 sys_chmod(void)
 {
@@ -506,15 +505,13 @@ sys_chmod(void)
   iunlock(ip);
   end_op();
   return ip->permBit;
-
 }
 
-
-
-
-
-
-
+/*----------------------------------------
+Method Name: sys_access
+Method Description: Checks to see if 
+user X can access file Y
+----------------------------------------*/
 int 
 sys_access(void) // added by Curtis
 {
@@ -527,8 +524,6 @@ if(argint(0, &UID) < 0)
   
 if(argstr(1, &file_name) < 0)
     return 1;
-
-
 
 begin_op();
     if((ip = namei(file_name)) == 0){

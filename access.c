@@ -4,6 +4,12 @@
 
 int STDOUT = 1;
 
+/*----------------------------------------
+Method Name: uaccess
+Method Description: Backbone of the access
+system call
+Method Return: 0 if successful, 1 if failed
+----------------------------------------*/
 int uaccess(uint varX , char* filename ){
    
     int x = access( varX, filename);
@@ -13,14 +19,14 @@ int uaccess(uint varX , char* filename ){
 		printf(1,"File Can Be Accessed\n");
 		return x;
 	}
+	
 	if(x==1){
 		//CANNOT ACCESS
 		printf(1,"File Cannot Be Accessed\n");
 		return x;
 	}
 
-	printf(1,"There was an error trying to get the neccessary file data\n");
-	
+	printf(1,"There was an error trying to get the neccessary file data\n");	
 	return 1;
 }
 
