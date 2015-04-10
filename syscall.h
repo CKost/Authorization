@@ -22,3 +22,4 @@
 #define SYS_close  21
 #define SYS_getuid 22
 #define SYS_setuid 23
+#define SYS_getcwd 24

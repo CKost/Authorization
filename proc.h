@@ -68,6 +68,7 @@ struct proc {
   char name[16];               // Process name (debugging)
   uint uid;                    // Real UserID
   //uint euid;                 // Effective UserID
+  char wdpath[255];            // pointer to null-terminated working directory path
 };
 
 // Process memory is laid out contiguously, low addresses first:

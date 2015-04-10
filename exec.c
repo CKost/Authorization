@@ -85,6 +85,9 @@ exec(char *path, char **argv)
     if(*s == '/')
       last = s+1;
   safestrcpy(proc->name, last, sizeof(proc->name));
+    
+  // new process uses parent's path by default
+  ////////safestrcpy(proc->wdpath, path, sizeof(proc->wdpath)); //path-last
 
   // Commit to the user image.
   oldpgdir = proc->pgdir;

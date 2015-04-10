@@ -25,6 +25,7 @@ int sleep(int);
 int uptime(void);
 int getuid(void);
 int setuid(int);
+char* getcwd(char *buf, int size);
 
 // ulib.c
 int stat(char*, struct stat*);
