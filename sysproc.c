@@ -69,11 +69,7 @@ sys_setuid(void)
 {
   uint uargv;
   argint(0, (int*)&uargv);
-  struct proc *tempproc = proc;
-  while (tempproc->pid != 1){
-    tempproc = tempproc->parent;
-  }
-  tempproc->uid = uargv;
+  proc->uid = uargv;
   return 0;
 }
 
