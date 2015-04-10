@@ -547,34 +547,33 @@ sys_chmod(void)
 {
   //will eventually check the user's id to make sure they are the owner of the file.
   //changes the file to be owned by someone else.
-  char* file_name = 0;
-  int permBit = 0;
+  char* path;
+  int permBit;
   struct inode *ip;
-  
-  // get the file name from userland
-  if(argstr(0, &file_name) < 0)
+
+  if(argstr(0, &path) < 0){
     return -1;
-  // get the permBit from userland
-  if(argint(1, &permBit) < 0)
+  }
+  if(argint(1, &permBit) < 0){
     return -2;
-  // change the file's, that is named file_name, permBit to permBit
-  
+  }
 
   begin_op();
-  if((ip = namei(file_name)) == 0){
+  if((ip = namei(path)) == 0){
     end_op();
     return -3;
   }
-  // file name has been verified.
   if(permBit == -1){
-   return ip->permBit;
+    end_op();
+    return ip->permBit;    
   }
   ilock(ip);
+
   ip->permBit = permBit;
-  iupdate(ip);
   iunlock(ip);
   end_op();
   return ip->permBit;
+
 }
 
 /*----------------------------------------

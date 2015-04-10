@@ -41,6 +41,11 @@ main(int argc, char **argv)
 			\n");
 		exit();
 	}
-	uchmod(argv[1], atoi(argv[2]));
+	if((int)*argv[2] == 63){
+		uchmod(argv[1],-1);
+	}else{
+		uchmod(argv[1], atoi(argv[2]));
+
+	}
   exit();
 }
