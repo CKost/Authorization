@@ -520,6 +520,27 @@ sys_access(void) // added by Curtis
    char* file_name = 0; //Arg2
    short bits =0; //Arg3
 
+if(argint(0, &UID) < 0)
+    return -1;
+  
+if(argstr(1, &file_name) < 0)
+    return -2;
+
+if(argint(2,&bits)<0)
+	return -3;
+
+begin_op();
+    if((ip = namei(file_name)) == 0){
+      end_op();
+      return -4;
+    }
+    if(ip-> UID == UID){
+    	//THEY MATCH
+    }
+
+
+    end__op();
+
 
 
     return 0;
