@@ -488,9 +488,20 @@ sys_chmod(void)
     return 0;
 }
 
+
+
+
+
+
+
 int 
 sys_access(void) // added by Curtis
 {
-    int x  =0;
-    return x;
+   int UID = 0;  //Arg1
+   char* file_name = 0; //Arg2
+   short bits =0; //Arg3
+
+
+
+    return 0;
 }
