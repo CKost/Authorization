@@ -359,8 +359,8 @@ sys_mknod(void)
      argint(1, &major) < 0 ||
      argint(2, &minor) < 0 ||
      (ip = create(path, T_DEV, major, minor)) == 0){
-    end_op();
-    return -1;
+        end_op();
+        return -1;
   }
   iunlockput(ip);
   end_op();
@@ -484,6 +484,7 @@ sys_chmod(void)
   char* file_name = 0;
   int permBit = 0;
   struct inode *ip;
+  
   // get the file name from userland
   if(argstr(0, &file_name) < 0)
     return -1;
@@ -491,6 +492,8 @@ sys_chmod(void)
   if(argint(1, &permBit) < 0)
     return -2;
   // change the file's, that is named file_name, permBit to permBit
+  
+
   begin_op();
   if((ip = namei(file_name)) == 0){
     end_op();
