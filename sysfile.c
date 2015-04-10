@@ -288,6 +288,7 @@ sys_open(void)
   int fd, omode;
   struct file *f;
   struct inode *ip;
+  struct inode *ip2;
 
   if(argstr(0, &path) < 0 || argint(1, &omode) < 0)
     return -1;
@@ -322,13 +323,38 @@ sys_open(void)
   }
   iunlock(ip);
   end_op();
+  //ADDING SYS ACCESS CALL HERE
 
+ begin_op();
+    if((ip2 = namei(path)) == 0){
+      end_op();
+      return -1;
+    }
+    if(ip-> UID == ip2 -> UID){
+
+    	  end_op();
+    	  f->type = FD_INODE;
+		  f->ip = ip;
+		  f->off = 0;
+		  f->readable = !(omode & O_WRONLY);
+		  f->writable = (omode & O_WRONLY) || (omode & O_RDWR);
+	   
+    	  return fd;
+    }
+
+    return -1;
+  	 
+ 
+  
+  //END ADDING NEW CODE TO THIS CALL
+  /*
   f->type = FD_INODE;
   f->ip = ip;
   f->off = 0;
   f->readable = !(omode & O_WRONLY);
   f->writable = (omode & O_WRONLY) || (omode & O_RDWR);
   return fd;
+  */
 }
 
 int
