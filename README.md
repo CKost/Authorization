@@ -18,6 +18,7 @@ LOG:
 4/9/15 20:04 - ALL: Team Working at Wiglz
 4/10/15 00:26 - BRM: Checked out new branch to clean up code
 4/10/15 00:41 - BRM: Committed aesthetic changes and merged branch to master
+4/10/15 01:27 - BRM: Test commit to ensure proper SSH setup
 
 
 TODO:
