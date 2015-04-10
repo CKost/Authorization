@@ -2,7 +2,7 @@
 Authorization For XV6 OS Project
 
 Team Members:
-Curtis 'The Kosher' Koster
+Curtis 'The Kosher' Koster :)
 John 'Wiglz'
 Daniel Wrecker
 Benjamin 'String Bean' Matthews
