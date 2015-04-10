@@ -474,11 +474,8 @@ sys_chown(void)
   int UID;
   struct inode *ip;
 
-  if(argstr(0, &path) < 0){
+  if(argstr(0, &path) < 0 || argint(1, &UID) < 0){
     return -1;
-  }
-  if(argint(1, &UID) < 0){
-    return -2;
   }
 
   begin_op();
@@ -493,6 +490,7 @@ sys_chown(void)
   ilock(ip);
 
   ip->UID = UID;
+  iupdate(ip);
   iunlock(ip);
   end_op();
   return ip->UID;
@@ -568,6 +566,7 @@ sys_chmod(void)
   ilock(ip);
 
   ip->permBit = permBit;
+  iupdate(ip);
   iunlock(ip);
   end_op();
   return ip->permBit;
