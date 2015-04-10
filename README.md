@@ -16,6 +16,7 @@ LOG:
 4/8/15 20:39 - CK: Working on Access user program yay
 4/9/15 18:45 - BRM: working on quit call
 4/9/15 19:21 - BRM: added quit call
+4/9/15 20:19 - BRM & CK: Working on access()
 
 TODO:
 1) Add owning UID to inode data -- CK & DR
