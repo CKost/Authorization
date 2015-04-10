@@ -70,6 +70,9 @@ found:
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
 
+  // Set wdpath to all null chars for each new process
+  memset(p->wdpath, 0, sizeof p->wdpath);
+
   return p;
 }
 
@@ -83,6 +86,7 @@ userinit(void)
   
   p = allocproc();
   initproc = p;
+  initproc->uid = 0;
   if((p->pgdir = setupkvm()) == 0)
     panic("userinit: out of memory?");
   inituvm(p->pgdir, _binary_initcode_start, (int)_binary_initcode_size);
@@ -98,6 +102,7 @@ userinit(void)
 
   safestrcpy(p->name, "initcode", sizeof(p->name));
   p->cwd = namei("/");
+  safestrcpy(p->wdpath, "/\n", 2);	//start in the root directory
 
   p->state = RUNNABLE;
 }
@@ -144,6 +149,7 @@ fork(void)
   }
   np->sz = proc->sz;
   np->parent = proc;
+  np->uid = proc->uid;
   *np->tf = *proc->tf;
 
   // Clear %eax so that fork returns 0 in the child.
@@ -155,6 +161,9 @@ fork(void)
   np->cwd = idup(proc->cwd);
 
   safestrcpy(np->name, proc->name, sizeof(proc->name));
+  
+  // Copy parent process' path to child process
+  safestrcpy(np->wdpath, proc->wdpath, sizeof(proc->wdpath));
  
   pid = np->pid;
 

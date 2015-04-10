@@ -25,3 +25,6 @@
 #define SYS_chmod 	24
 #define SYS_access 	25
 #define SYS_quit 	26
+#define SYS_getcwd 27
+#define SYS_getuid 28
+#define SYS_setuid 29

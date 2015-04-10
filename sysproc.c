@@ -55,6 +55,22 @@ sys_getppid(void)
 
 
   return parent_pid;
+
+}
+
+int
+sys_getuid(void)
+{
+  return proc->uid;
+}
+
+int
+sys_setuid(void)
+{
+  uint uargv;
+  argint(0, (int*)&uargv);
+  proc->uid = uargv;
+  return 0;
 }
 
 int
@@ -115,4 +131,18 @@ sys_quit(void)
   cprintf("XV6 Shutting Down. Goodbye!\n");
   outw( 0xB004, 0x0 | 0x2000 );
   return 0;
+}
+// return the current process' working directory
+int
+sys_getcwd(void)
+{
+  char *addr;
+  int n;
+
+  if(argint(1, &n) < 0)
+    return -1;
+  if(argstr(0, &addr) < 0)
+    return -1;
+  strncpy(addr,proc->wdpath,n);
+  return (int)addr;
 }

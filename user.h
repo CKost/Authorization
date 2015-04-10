@@ -28,6 +28,9 @@ int chown(char*, uint);
 int chmod(char*, uint);
 int access(uint , char*, uint);
 int quit(void);
+char* getcwd(char *buf, int size);
+int getuid(void);
+int setuid(int);
 
 // ulib.c
 int stat(char*, struct stat*);

@@ -4,34 +4,21 @@
 
 int STDOUT = 1;
 
-int uchown(char* file_name, uint new_UIDNumb){
-
-	int x = chown(file_name, new_UIDNumb);
-	if(-1 == x){
-		printf(1, "Error: File Name Invalid\n");
-		return 0;
-	}
-	if(-2 == x){
-		printf(1, "Error: Not a valid UID\n");
-		return 0;
-	}
-
-	if(-3 == x){
-
-		printf(1, "Error: Could not obtain i-node\n");
-		return 0;
-	}
-	if(-4 ==x ){
-		printf(1,"We are here\n");
-		return 0;
-	}
+int 
+uchown(char* file_name, uint new_UIDNumb){
 
 	if(new_UIDNumb == -1){
-		printf(1, "%s UID is %d\n",file_name, x);
+		printf(1, "%s UID is %d\n",file_name, chown(file_name, -1));
 	}else{
-		printf(STDOUT,"%s%s%s%d\n", "You changed ", file_name, " to ", x);
+		if(getuid() == 0){
+			return chown(file_name, new_UIDNumb);
+			
+		}else{
+			printf(1, "Invalid Permissions must be root\n");
+			return -1;
+		}
 	}
-	return 0;
+		return 0;
 }
 
 
@@ -45,8 +32,18 @@ main(int argc, char **argv)
 	if((int)*argv[2] == 63){
 		uchown(argv[1],-1);
 	}else{
-		uchown(argv[1], atoi(argv[2]));
+		int x = uchown(argv[1], atoi(argv[2]));
 
-	}
-  exit();
+
+		if(-1 == x){
+			printf(1, "Error: File Name Invalid\n");
+		}
+		if(-2 == x){
+			printf(1, "Error: Not a valid UID\n");
+		}
+			printf(STDOUT,"%s%s%s%d\n", "You changed ", argv[1], " to ", argv[2]);
+		}
+	
+ 	 exit();
+
 }
