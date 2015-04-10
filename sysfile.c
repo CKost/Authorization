@@ -483,15 +483,19 @@ sys_chown(void)
     end_op();
     return -3;
   }
-  if(UID == -1){
-    end_op();
-    return ip->UID;    
-  }
+
   ilock(ip);
+  if(UID == -1){
+    int y = ip->UID;
+    iunlock(ip);
+    end_op();
+    return y;    
+  }
 
   ip->UID = UID;
   iupdate(ip);
   iunlock(ip);
+  iput(ip);
   end_op();
   return ip->UID;
 
