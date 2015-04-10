@@ -610,12 +610,16 @@ sys_access(void) // added by Curtis
 {
   int UID = 0;  //Arg1
   char* file_name = 0; //Arg2
+  int perm = 0; // Arg3
   struct inode *ip;
 
   if(argint(0, &UID) < 0)
     return 1;
   
   if(argstr(1, &file_name) < 0)
+    return 1;
+
+  if(argint(2, &perm) < 0)
     return 1;
 
   begin_op();
@@ -628,8 +632,15 @@ sys_access(void) // added by Curtis
   
   if(ip-> UID == UID)
   {
-  	end_op();
-  	return 0;
+    //unsigned char mask = static_cast( 1 << perm );
+    //if(mask & perm)
+    //{
+    //  end_op();
+    //  return 0; 
+    //}
+  	
+    end_op();
+  	return 2;
   }
 
   end_op();

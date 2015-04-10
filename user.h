@@ -26,7 +26,7 @@ int sleep(int);
 int uptime(void);
 int chown(char*, uint);
 int chmod(char*, uint);
-int access(uint , char*);
+int access(uint , char*, uint);
 int quit(void);
 
 // ulib.c

@@ -10,8 +10,8 @@ Method Description: Backbone of the access
 system call
 Method Return: 0 if successful, 1 if failed
 ----------------------------------------*/
-int uaccess(uint varX , char* filename ){   
-    int x = access( varX, filename);
+int uaccess(uint varX , char* filename, uint perm ){   
+    int x = access( varX, filename, perm);
 	printf(STDOUT,"access sys call\n");
 	if(x ==0){
 		//CAN Access
@@ -23,6 +23,12 @@ int uaccess(uint varX , char* filename ){
 		//CANNOT ACCESS
 		printf(1,"File Cannot Be Accessed\n");
 		return x; // should be 1
+	}
+
+	if (x==2)
+	{
+		printf(1,"%s\n", "Bit is not set");
+		return x;
 	}
 
 	printf(1,"There was an error trying to get the neccessary file data\n");	
@@ -44,7 +50,7 @@ main(int argc, char **argv)
 		exit();
 	}
 
-   	uaccess(atoi(argv[1]),argv[2]);
+   	uaccess(atoi(argv[1]),argv[2],atoi(argv[3]));
   	exit();
   	return 0; // shouldn't ever reach here but ya never know... it is C...
 }
