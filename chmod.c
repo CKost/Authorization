@@ -29,7 +29,6 @@ int uchmod(char* file_name, short new_permBit){
 	}
 	return 0;
 }
-}
 
 
 int

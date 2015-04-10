@@ -483,6 +483,7 @@ sys_chmod(void)
   //changes the file to be owned by someone else.
   char* file_name = 0;
   int permBit = 0;
+  struct inode *ip;
   // get the file name from userland
   if(argstr(0, &file_name) < 0)
     return -1;
@@ -505,6 +506,7 @@ sys_chmod(void)
   iunlock(ip);
   end_op();
   return ip->permBit;
+
 }
 
 
@@ -518,7 +520,8 @@ sys_access(void) // added by Curtis
 {
    int UID = 0;  //Arg1
    char* file_name = 0; //Arg2
-   short bits =0; //Arg3
+   int bits =0; //Arg3
+   struct inode *ip;
 
 if(argint(0, &UID) < 0)
     return -1;
@@ -539,7 +542,7 @@ begin_op();
     }
 
 
-    end__op();
+    end_op();
 
 
 

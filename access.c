@@ -11,7 +11,7 @@ int uaccess(uint varX , char* filename , short varZ){
 	
 
 	
-	return 0;
+	return x;
 }
 
 
