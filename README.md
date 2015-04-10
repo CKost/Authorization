@@ -15,7 +15,9 @@ LOG:
 4/8/15 20:39 - CK: Working on Access user program yay
 4/9/15 18:45 - BRM: working on quit call
 4/9/15 19:21 - BRM: added quit call
-4/9/15 20:04 - ALL: Team Working at Wiggle's
+4/9/15 20:04 - ALL: Team Working at Wiglz
+4/10/15 00:26 - BRM: Checked out new branch to clean up code
+4/10/15 00:41 - BRM: Committed aesthetic changes and merged branch to master
 
 
 TODO:

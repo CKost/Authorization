@@ -106,6 +106,9 @@ sys_uptime(void)
 }
 
 // Quit system call
+// Sends I/O command to kernel to shutdown system.
+// Code found through lots of Google digging and 
+// much Stack Overlowing.
 int
 sys_quit(void)
 {
