@@ -2,14 +2,13 @@
 Authorization For XV6 OS Project
 
 Team Members:
-Curtis 'The Kosher' Koster
+Curtis 'The Kosher' Koster :)
 John 'Wiglz'
 Daniel Wrecker
 Benjamin 'String Bean' Matthews
 
 
 LOG:
-
 4/6/15 19:41 - CK: Method Stubs & fs.h added permission bit/UID to Inode Struct
 4/6/15 19:41 - BRM: Git Setup
 4/7/15 21:31 - Daniel working with Curtis.
@@ -17,7 +16,6 @@ LOG:
 4/9/15 18:45 - BRM: working on quit call
 4/9/15 19:21 - BRM: added quit call
 4/9/15 20:04 - ALL: Team Working at Wiggle's
-
 
 
 TODO:
