@@ -6,6 +6,7 @@ int STDOUT = 1;
 
 int uaccess(uint varX , char* filename , short varZ){
    
+    int x = access( varX, filename, varZ);
 	printf(STDOUT,"access sys call\n");
 	
 
