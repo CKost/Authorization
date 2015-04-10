@@ -639,6 +639,49 @@ namex(char *path, int nameiparent, char *name)
   return ip;
 }
 
+// added by mande806
+// normalizes an original path and a modifier path
+// results in a proper merged path
+// e.g. path = "/tmp/userstuff" path2 = "../morestuff"
+//      returns "/tmp/morestuff"
+char* processpath(char *path, char *path2)
+{
+  char name[DIRSIZ];
+  char tmp;
+  int loc = 0;
+  while((path2 = skipelem(path2, name)) != 0){	//grab first chunk of path2
+  //cprintf("%s",name);
+    if(strncmp(name,"..",2) == 0)		//process parent directory
+    {
+      for(loc = strlen(path); loc >0; loc--)	//equivalent of InstrRev(path,"/")
+      {
+        //cprintf("%s\n",&path[loc]);
+        tmp = path[loc];
+    	if(tmp == '/')				//if found, clear out that portion of the path
+        {					//effectively moving up one directory
+          cprintf("found: %s\n",&path[loc]);
+          memset(&path[loc],0,256-loc);
+	  break;
+        }
+      }
+      if(loc == 0)				//clear out entire path (except root '/') if we can't find '/'
+	memset(path+1,0,255);
+    }
+    else					//process child directory
+    {
+      if(strncmp(name,".",1) != 0)		//ignore requests for current directory
+      {
+        if(path[strlen(path)-1] != '/')		//add a '/' delimiter
+        {
+           strncpy(path+strlen(path),"/",1);
+        }
+        strncpy(path+strlen(path),name,strlen(name));	//add the child directory to the path
+      }
+    }
+  }
+  return path;
+}
+
 struct inode*
 namei(char *path)
 {

@@ -89,3 +89,18 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// return the current process' working directory
+int
+sys_getcwd(void)
+{
+  char *addr;
+  int n;
+
+  if(argint(1, &n) < 0)
+    return -1;
+  if(argstr(0, &addr) < 0)
+    return -1;
+  strncpy(addr,proc->wdpath,n);
+  return (int)addr;
+}

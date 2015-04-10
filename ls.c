@@ -75,6 +75,11 @@ main(int argc, char *argv[])
 {
   int i;
 
+  char *workdir = malloc(256);
+  workdir = getcwd(workdir,256);
+
+    printf(1, "current directory: %s\n",workdir);
+
   if(argc < 2){
     ls(".");
     exit();
