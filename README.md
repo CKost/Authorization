@@ -21,8 +21,7 @@ LOG:
 TODO:
 1) Add owning UID to inode data -- CK & DR
 2) Permission bits in inode structures -- CK & DR
-3) New Syscall: chown -- STUBBED BY CK & DR
-	a. Need to send data to sys_chown()
+
 4) New Syscall: chmod -- STUBBED BY CK & DR
 	a. need to send data to sys_chmod()
 	
