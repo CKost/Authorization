@@ -5,7 +5,7 @@
 int STDOUT = 1;
 
 int uchown(char* file_name, uint new_UIDNumb){
-
+	printf(1, "%s\n", file_name);
 	int x = chown(file_name, new_UIDNumb);
 	if(-1 == x){
 		printf(1, "Error: File Name Invalid\n");
@@ -15,7 +15,7 @@ int uchown(char* file_name, uint new_UIDNumb){
 		printf(1, "Error: Not a valid UID\n");
 		return 0;
 	}
-	if(-2 == x){
+	if(-3 == x){
 		printf(1, "Error: Could not obtain i-node\n");
 		return 0;
 	}
