@@ -40,7 +40,10 @@ main(int argc, char **argv)
 		if(-2 == x){
 			printf(1, "Error: Not a valid UID\n");
 		}
-			printf(STDOUT,"%s%s%s%d\n", "You changed ", argv[1], " to ", argv[2]);
+		if (0 == x)
+		{
+			printf(STDOUT,"%s%s%s%s\n", "You changed ", argv[1], " to ", argv[2]);
+		}
 		}
 	
  	 exit();

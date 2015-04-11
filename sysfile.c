@@ -332,43 +332,43 @@ sys_open(void)
   
 
   //ADDING SYS ACCESS CALL HERE. Copied/Pasted ACCESS Sys Call Contents Here
-//
-//  begin_op();
-//  ilock(ip);
-//  int UID = proc->uid;
-//  int permBit = ip->permBit;
-//  int ownerOfFile = ip->UID;
-//  int checkBits = 0;
-//  iunlock(ip);
-//  end_op();
-//  if(omode == O_RDONLY){
-//    checkBits = 4;
-//  }else{
-//    if(omode == O_WRONLY){
-//      checkBits = 2;
-//    }else{
-//      if(omode == O_RDWR){
-//        checkBits = 6;
-//      }
-//    }
-//  }
-//
-//  // if they're the ownerOfFile of the file or ROOT
-//  if (ownerOfFile == UID || 0 == UID)
-//  {
-//    if((permBit & (checkBits << 4)) != (checkBits << 4)){
-//      end_op();
-//      return -1;
-//    }
-//  }else{
-//    // check the planet
-//    if((permBit & (checkBits)) != checkBits){
-//      // no you don't have permission
-//      end_op();
-//      return -1;
-//    }
-//  }
-//
+
+  // begin_op();
+  // ilock(ip);
+  // int UID = proc->uid;
+  // int permBit = ip->permBit;
+  // int ownerOfFile = ip->UID;
+  // int checkBits = 0;
+  // iunlock(ip);
+  // end_op();
+  // if(omode == O_RDONLY){
+  //   checkBits = 4;
+  // }else{
+  //   if(omode == O_WRONLY){
+  //     checkBits = 2;
+  //   }else{
+  //     if(omode == O_RDWR){
+  //       checkBits = 6;
+  //     }
+  //   }
+  // }
+
+  // // if they're the ownerOfFile of the file or ROOT
+  // if (ownerOfFile == UID || 0 == UID)
+  // {
+  //   if((permBit & (checkBits << 4)) != (checkBits << 4)){
+  //     end_op();
+  //     return -1;
+  //   }
+  // }else{
+  //   // check the planet
+  //   if((permBit & (checkBits)) != checkBits){
+  //     // no you don't have permission
+  //     end_op();
+  //     return -1;
+  //   }
+  // }
+
   	 
   //END ADDING NEW CODE TO THIS CALL
   

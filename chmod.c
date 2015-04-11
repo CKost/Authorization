@@ -58,13 +58,17 @@ main(int argc, char **argv)
 	if(argc == 4){
 		// they gave us stuff!!
 
-		uchmod(argv[1], atoi(argv[2]), atoi(argv[3]));
+		if(access(getuid(), argv[1], 4) == 0 && access(getuid(), argv[1], 2) == 0){
+			uchmod(argv[1], atoi(argv[2]), atoi(argv[3]));
+		}
+		else{
+			printf(1, "You do not have permission to change this\n");
+		}
 		exit();
 	}
 	if(argc == 3){
 		// it was probably a question mark
-		if(access(getuid(), argv[1], 4) == 0 && access(getuid(), argv[1], 2) == 0)
-			uchmod(argv[1], atoi(argv[2]), -1);
+		uchmod(argv[1], atoi(argv[2]), -1);
 	}
 
 
