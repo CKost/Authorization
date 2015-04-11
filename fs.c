@@ -188,6 +188,8 @@ ialloc(uint dev, short type)
     if(dip->type == 0){  // a free inode
       memset(dip, 0, sizeof(*dip));
       dip->type = type;
+      dip->UID = 0;
+      dip->permBit = 0x73;
       log_write(bp);   // mark it allocated on the disk
       brelse(bp);
       return iget(dev, inum);
