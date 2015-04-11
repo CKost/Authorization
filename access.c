@@ -10,9 +10,21 @@ Method Description: Backbone of the access
 system call
 Method Return: 0 if successful, 1 if failed
 ----------------------------------------*/
-int uaccess(uint varX , char* filename, uint perm ){   
-    int x = access( varX, filename, perm);
-	printf(STDOUT,"access sys call\n");
+int uaccess(uint varX , char* filename, char perm ){   
+	int permInt = -1;
+	if ('X' == perm || 'x' == perm)
+		permInt = 4;
+	if ('W' == perm || 'w' == perm)
+		permInt = 2;
+	if ('R' == perm || 'r' == perm)
+		permInt = 1;
+	if(permInt == -1){
+		printf(1, "Please check R, W, X\n");
+		return 0;
+	}
+
+    int x = access( varX, filename, permInt);
+	//printf(STDOUT,"access sys call\n");
 	if(x ==0){
 		//CAN Access
 		printf(1,"File Can Be Accessed\n");
@@ -27,7 +39,7 @@ int uaccess(uint varX , char* filename, uint perm ){
 
 	if (x==2)
 	{
-		printf(1,"%s\n", "Bit is not set");
+		printf(1,"%s\n", "File Can't be Accessed");
 		return x;
 	}
 
@@ -44,13 +56,13 @@ main(int argc, char **argv)
     // File Y
    	//  Purpose Z
    	// Ensure that proper number of variables are present
-	if(argc != 3)
+	if(argc != 4)
 	{   
-		printf(1,"Requires 2 Args: User X, File Y\n");
+		printf(1,"Requires 3 Args: User X, File Y, Perm Z\n");
 		exit();
 	}
 
-   	uaccess(atoi(argv[1]),argv[2],atoi(argv[3]));
+   	uaccess(atoi(argv[1]),argv[2], argv[3][0]);
   	exit();
   	return 0; // shouldn't ever reach here but ya never know... it is C...
 }

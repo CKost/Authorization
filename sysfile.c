@@ -266,6 +266,7 @@ create(char *path, short type, short major, short minor)
   ip->minor = minor;
   ip->nlink = 1;
   ip->UID   = proc->uid; // defaults to current user
+  ip->permBit = 0x74; // defaults to owner all rights and world Read
   iupdate(ip);
 
   if(type == T_DIR){  // Create . and .. entries.
@@ -536,13 +537,14 @@ sys_chmod(void)
   //will eventually check the user's id to make sure they are the owner of the file.
   //changes the file to be owned by someone else.
   char* path;
-  int permBit;
+  int OpermBit;
+  int WpermBit;
   struct inode *ip;
 
   if(argstr(0, &path) < 0){
     return -1;
   }
-  if(argint(1, &permBit) < 0){
+  if(argint(1, &OpermBit) < 0 || argint(2, &WpermBit) < 0){
     return -2;
   }
 
@@ -551,19 +553,23 @@ sys_chmod(void)
     end_op();
     return -3;
   }
-  if(permBit == -1){
+  ilock(ip);
+  if(OpermBit == -1){
     int y = ip->permBit;
     iunlock(ip);
     end_op();
     return y;   
   }
-  ilock(ip);
-
-  ip->permBit = permBit;
+  int x = OpermBit;
+  x = x << 4;
+  x = x + WpermBit;
+  ip->permBit = x;
+  
+  
   iupdate(ip);
   iunlock(ip);
   end_op();
-  return 0;
+  return x;
 
 }
 
@@ -576,9 +582,9 @@ sys_chmod(void)
 int 
 sys_access(void) // added by Curtis
 {
-  int UID = 0;  //Arg1
+  int UID = -1;  //Arg1
   char* file_name = 0; //Arg2
-  int perm = 0; // Arg3
+  int checkBit = 0; // Arg3
   struct inode *ip;
 
   if(argint(0, &UID) < 0)
@@ -587,29 +593,45 @@ sys_access(void) // added by Curtis
   if(argstr(1, &file_name) < 0)
     return 1;
 
-  if(argint(2, &perm) < 0)
+  if(argint(2, &checkBit) < 0)
     return 1;
 
   begin_op();
-  
+
   if((ip = namei(file_name)) == 0)
   {
     end_op();
     return 1;
   }
-  
-  if(ip->UID == UID)
+
+  ilock(ip);
+  int permBit = ip->permBit;
+  int ownerOfFile   = ip->UID;
+  iunlock(ip);
+  // if they're the ownerOfFile of the file or ROOT
+  if (ownerOfFile == UID || 0 == UID)
   {
-    //unsigned char mask = static_cast( 1 << perm );
-    //if(mask & perm)
-    //{
-    //  end_op();
-    //  return 0; 
-    //}
-  	
+    /* code */
+  if((permBit & (checkBit << 4)) == 0){
+    // no you don't have permission
+    // go check world
+  }else{
+    // yes you do.
     end_op();
-  	return 2;
+    return 0;
   }
+  }
+  // check the planet
+  if((permBit & (checkBit)) == 0){
+    // no you don't have permission
+    end_op();
+    return 2;
+  }else{
+    // yes you do.
+    end_op();
+    return 0;
+  }
+
 
   end_op();
   return 1;

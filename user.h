@@ -25,7 +25,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int chown(char*, uint);
-int chmod(char*, uint);
+int chmod(char*, uint, uint);
 int access(uint , char*, uint);
 int quit(void);
 char* getcwd(char *buf, int size);

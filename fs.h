@@ -23,13 +23,26 @@ struct superblock {
 #define NINDIRECT (BSIZE / sizeof(uint))
 #define MAXFILE (NDIRECT + NINDIRECT)
 
+// Permission Bit Structure
+struct permissionBit 
+{
+  /* data */
+  int owner_R;
+  int owner_W;
+  int owner_X;
+  int world_R;
+  int world_W;
+  int world_X; 
+};
+
+
 // On-disk inode structure
 struct dinode {
   short type;           // File type
   short major;          // Major device number (T_DEV only)
   short minor;          // Minor device number (T_DEV only)
   short nlink;          // Number of links to inode in file system
-  short permBit;        //For Task 6: Permission Bit
+  uint permBit;        //For Task 6: Permission Bit
   uint size;            // Size of file (bytes)
   uint addrs[NDIRECT+1];// Data block addresses
   uint UID;             //For Task 6: Add UID to I-Node data in on-disk
