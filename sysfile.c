@@ -504,6 +504,7 @@ sys_pipe(void)
 }
 
 //----- BEGIN AUTHZ SYSTEM CALLS -----
+
 //----------------------------------------
 //Method Name: sys_chown
 //Method Description: Checks permission bits
@@ -574,6 +575,8 @@ sys_chmod(void)
     end_op();
     return -3;
   }
+
+
   ilock(ip);
   if(OpermBit == -1){
     int y = ip->permBit;
@@ -593,6 +596,7 @@ sys_chmod(void)
   return x;
 
 }
+
 
 //----------------------------------------
 //Method Name: sys_access
@@ -626,7 +630,7 @@ sys_access(void) // added by Curtis
   }
 
   ilock(ip);
-  int permBit = ip->permBit;
+  int permBit       = ip->permBit;
   int ownerOfFile   = ip->UID;
   iunlock(ip);
   // if they're the ownerOfFile of the file or ROOT

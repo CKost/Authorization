@@ -29,6 +29,11 @@ int uchmod(char* file_name, int OBit, int WBit){
 
 		printf(1, "Error: Could not obtain i-node\n");
 		return 0;
+	}	
+	if(-4 == x){
+
+		printf(1, "Error: You do not have permission to change this\n");
+		return 0;
 	}
 
 	if(WBit == -1){
@@ -58,7 +63,8 @@ main(int argc, char **argv)
 	}
 	if(argc == 3){
 		// it was probably a question mark
-		uchmod(argv[1], atoi(argv[2]), -1);
+		if(access(getuid(), argv[1], 4) == 0 && access(getuid(), argv[1], 2) == 0)
+			uchmod(argv[1], atoi(argv[2]), -1);
 	}
 
 
