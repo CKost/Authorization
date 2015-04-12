@@ -158,6 +158,7 @@ mkfs: mkfs.c fs.h
 
 UPROGS=\
 	_cat\
+    _login\
 	_echo\
 	_forktest\
 	_grep\
@@ -176,6 +177,9 @@ UPROGS=\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
+    
+fs.img: mkfs etc-passwd $(UPROGS)
+	./mkfs fs.img etc-passwd $(UPROGS)
 
 -include *.d
 
