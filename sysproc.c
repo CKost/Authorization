@@ -43,6 +43,24 @@ sys_getpid(void)
 }
 
 int
+sys_getuid(void)
+{
+  return proc->uid;
+}
+
+int
+sys_setuid(void)
+{
+  uint uargv;
+  argint(0, (int*)&uargv);
+  if (proc->uid == 0) {
+    proc->uid = uargv;
+    return 0;
+  }
+  return -1;
+}
+
+int
 sys_sbrk(void)
 {
   int addr;

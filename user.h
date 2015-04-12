@@ -23,6 +23,8 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int getuid(void);
+int setuid(int);
 char* getcwd(char *buf, int size);
 
 // ulib.c
