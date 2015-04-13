@@ -23,18 +23,6 @@ struct superblock {
 #define NINDIRECT (BSIZE / sizeof(uint))
 #define MAXFILE (NDIRECT + NINDIRECT)
 
-// Permission Bit Structure
-struct permissionBit 
-{
-  /* data */
-  int owner_R;
-  int owner_W;
-  int owner_X;
-  int world_R;
-  int world_W;
-  int world_X; 
-};
-
 
 // On-disk inode structure
 struct dinode {
