@@ -12,6 +12,7 @@ OBJS = \
 	log.o\
 	main.o\
 	mp.o\
+	null.o\
 	picirq.o\
 	pipe.o\
 	proc.o\
@@ -25,8 +26,10 @@ OBJS = \
 	trapasm.o\
 	trap.o\
 	uart.o\
+	urandom.o\
 	vectors.o\
 	vm.o\
+	zero.o\
 
 # Cross-compiling (e.g., on Mac OS X)
 # TOOLPREFIX = i386-jos-elf
@@ -159,6 +162,7 @@ mkfs: mkfs.c fs.h
 UPROGS=\
 	_cat\
     _login\
+	_dd\
 	_echo\
 	_forktest\
 	_grep\
@@ -179,6 +183,10 @@ UPROGS=\
     _access\
     _quit\
 	_testuid\
+	_testnull\
+	_testzero\
+	_testurandom\
+	_mknod\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

@@ -17,6 +17,17 @@ main(void)
     mknod("console", 1, 1);
     open("console", O_RDWR);
   }
+  // Begin device additions
+  if(open("null", O_RDWR) < 0){
+    mknod("null", 2, 1);
+  }
+  if(open("zero", O_RDWR) < 0){
+    mknod("zero", 3, 1);
+  }
+  if(open("urandom", O_RDWR) < 0){
+    mknod("urandom", 4, 1);
+  }
+
   dup(0);  // stdout
   dup(0);  // stderr
 

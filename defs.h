@@ -93,6 +93,9 @@ int             mpbcpu(void);
 void            mpinit(void);
 void            mpstartthem(void);
 
+// null
+void 			nullinit(void);
+
 // picirq.c
 void            picenable(int);
 void            picinit(void);
@@ -179,6 +182,12 @@ void            switchuvm(struct proc*);
 void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
+
+// urandom.c
+void 			urandominit(void);
+
+// zero.c
+void 			zeroinit(void);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
