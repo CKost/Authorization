@@ -15,7 +15,7 @@ uchown(char* file_name, uint new_UIDNumb){
 			
 		}else{
 			printf(1, "Invalid Permissions must be root\n");
-			return -1;
+			return -3;
 		}
 	}
 		return 0;
@@ -44,7 +44,7 @@ main(int argc, char **argv)
 		{
 			printf(STDOUT,"%s%s%s%s\n", "You changed ", argv[1], " to ", argv[2]);
 		}
-		}
+	}
 	
  	 exit();
 

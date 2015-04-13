@@ -76,6 +76,16 @@ runcmd(struct cmd *cmd)
     if(ecmd->argv[0] == 0)
       exit();
     exec(ecmd->argv[0], ecmd->argv);
+    char newpath[255];
+    memset(newpath,0,256);
+    if (strchr(ecmd->argv[0],'/') != 0)
+    {
+      printf(2, "exec %s failed\n", ecmd->argv[0]);
+      break;
+    }
+    strcpy(newpath+1,ecmd->argv[0]);
+    newpath[0] = '/';
+    exec(newpath,ecmd->argv);
     printf(2, "exec %s failed\n", ecmd->argv[0]);
     break;
 
