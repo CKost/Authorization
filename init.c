@@ -17,6 +17,8 @@ main(void)
     mknod("console", 1, 1);
     open("console", O_RDWR);
   }
+  dup(0);
+  dup(0);
   // Begin device additions
   if(open("null", O_RDWR) < 0){
     mknod("null", 2, 1);
@@ -28,8 +30,8 @@ main(void)
     mknod("urandom", 4, 1);
   }
 
-  dup(0);  // stdout
-  dup(0);  // stderr
+  //dup(0);  // stdout
+//  dup(0);  // stderr
 
   for(;;){
     printf(1, "init: starting sh\n");

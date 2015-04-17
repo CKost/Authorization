@@ -340,7 +340,6 @@ sys_open(void)
   int ownerOfFile = ip->UID;
   int checkBits = 0;
   iunlock(ip);
-  end_op();
   if(omode == O_RDONLY){
     checkBits = 4;
   }else{
@@ -377,6 +376,7 @@ sys_open(void)
   f->off = 0;
   f->readable = !(omode & O_WRONLY);
   f->writable = (omode & O_WRONLY) || (omode & O_RDWR);
+  end_op();
   return fd;
   
 }
@@ -637,7 +637,7 @@ sys_access(void) // added by Curtis
   if (ownerOfFile == UID || 0 == UID)
   {
     /* code */
-  if((permBit & (checkBit << 4)) != (checkBit << 4)){
+  if(0 != UID && (permBit & (checkBit << 4)) != (checkBit << 4)){
     // no you don't have permission
     // go check world
   }else{

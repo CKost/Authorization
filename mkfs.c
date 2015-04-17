@@ -231,8 +231,8 @@ ialloc(ushort type)
   din.type = xshort(type);
   din.nlink = xshort(1);
   din.size = xint(0);
-  din.UID = 0;        // default to be owned by root
-  din.permBit = 0x74; // default to be all access for owner and read for world
+  din.permBit = 0x76; // ownwer is all world is RW
+  din.UID = 0;
   winode(inum, &din);
   return inum;
 }
