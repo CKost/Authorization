@@ -637,7 +637,7 @@ sys_access(void) // added by Curtis
   if (ownerOfFile == UID || 0 == UID)
   {
     /* code */
-  if((permBit & (checkBit << 4)) != (checkBit << 4)){
+  if(0 != UID && (permBit & (checkBit << 4)) != (checkBit << 4)){
     // no you don't have permission
     // go check world
   }else{
